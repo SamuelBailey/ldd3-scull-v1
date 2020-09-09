@@ -1,0 +1,8 @@
+#! /bin/bash
+dir=$(pwd)
+vm="192.168.122.33"
+if ! ssh $vm "ls $dir" ; then
+    ssh $vm "mkdir -p $dir"
+fi
+scp ./* $vm:$dir
+ssh $vm "cd $dir; make"
