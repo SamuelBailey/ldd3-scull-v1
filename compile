@@ -6,6 +6,6 @@ if ! ssh $vm "ls $dir" > /dev/null 2>&1 ; then
     ssh $vm "mkdir -p $dir"
 fi
 # scp -rp $dir/. $vm:$dir
-rsync -rtz --del --progress $dir/ $vm:$dir/
-ssh $vm "cd $dir; make $*"
+rsync -rtz --del --progress --exclude '.git' $dir/ $vm:$dir/
+ssh -tt $vm "cd $dir; make $*"
 
